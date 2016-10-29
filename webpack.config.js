@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+var path = require('path');
 
 module.exports = {
   entry: [
@@ -12,7 +13,7 @@ module.exports = {
   plugins: [
     new webpack.ProvidePlugin({
       '$': 'jquery',
-      'jQuery' : 'jquery'
+      'jQuery': 'jquery'
     })
   ],
   output: {
@@ -31,7 +32,7 @@ module.exports = {
       CountdownForm: 'app/components/CountdownForm.js',
       Controls: 'app/components/Controls.js'
     },
-    extenstions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx']
   },
   module: {
     loaders: [
@@ -40,10 +41,15 @@ module.exports = {
         query: {
           presets: ['react', 'es2015', 'stage-0']
         },
-        test: /\.jsx?$/,
+        test: /\.js?$/,
         exclude: /(node_modules|bower_components)/
       }
     ]
   },
-  devtool: 'inline-source-map'
+  sassLoader: {
+    includePaths: [
+      path.resolve(__dirname, './node_modules/foundation-sites/scss')
+    ]
+  },
+  devtool: 'cheap-module-eval-source-map'
 };
